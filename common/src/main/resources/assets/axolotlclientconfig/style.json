@@ -1,0 +1,12 @@
+{
+	"background": "#B808080D",
+	"background2": "#E012121B",
+	"container": "#FF1A1A26",
+	"highlight": "#FF2A2440",
+	"highlight2": "#FF7C5CFF",
+	"text": "#FFF1F1F6",
+	"text2": "#FFC4C4D2",
+	"text3": "#FF8A8A9E",
+	"unfocused": "#FF2E2E3E",
+	"inactive": "#FF4A4A5C"
+}

@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "axolotlclient",
+	"version": "${version}",
+	"name": "ghost client",
+	"description": "El cliente de Ghost Launcher: HUD configurable, zoom, freelook, motion blur, utilidades PvP y más.\n\nVersión modificada de un proyecto de código abierto (LGPL-3.0). Autores originales en Créditos.",
+	"authors": [
+		"Ghost Launcher"
+	],
+	"contributors": [
+		"moehreag",
+		"YakisikliBaran",
+		"DragonEggBedrockBreaking",
+		"TheKodeToad",
+		"CornetPanique86"
+	],
+	"contact": {
+		"sources": "https://codeberg.org/AxolotlClient/AxolotlClient-mod"
+	},
+	"license": "LGPL-3.0-or-later",
+	"icon": "assets/axolotlclient/icon.png",
+	"accessWidener": "axolotlclient.classtweaker",
+	"environment": "client",
+	"entrypoints": {
+		"modmenu": [
+			"io.github.axolotlclient.config.modmenu.ModMenuCompat"
+		]
+	},
+	"mixins": [
+		"axolotlclient.mixins.json",
+		"axolotlclient-bridge.mixins.json",
+		"axolotlclient.e4mc.mixins.json"
+	],
+	"custom": {
+		"axolotlclient:bridge_impl_version": "V1_8"
+	},
+	"depends": {
+		"fabricloader": ">=0.18.0",
+		"minecraft": "1.8.9",
+		"osl-resource-loader": "*",
+		"osl-lifecycle-events": "*",
+		"osl-keybinds": "*",
+		"osl-entrypoints": "*",
+		"axolotlclientconfig": "*",
+		"axolotlclient-common": "*",
+		"legacy-lwjgl3": ">=1.4.3"
+	}
+}
