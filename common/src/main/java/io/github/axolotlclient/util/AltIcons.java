@@ -69,6 +69,8 @@ public class AltIcons {
 	 * </pre>
 	 */
 	public static Optional<InputStream> getAltIcon() {
+		// ghost client: el icono es siempre el fantasma
+		if (Boolean.TRUE) return Optional.empty();
 		var current = MonthDay.from(ZonedDateTime.now());
 		if (current.getMonth().equals(Month.JUNE)) {
 			return Optional.ofNullable(read("@FOX_PRIDE@"));

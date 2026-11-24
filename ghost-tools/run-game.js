@@ -44,7 +44,9 @@ app.whenReady().then(async () => {
       version: { number: version, type: 'release', custom: fabric.id }, javaPath,
       memory: { max: '4G', min: '1G' }, window: { width: Number(process.env.GHOST_W || 1280), height: Number(process.env.GHOST_H || 720) },
       customArgs: [`-XX:ErrorFile=${process.argv[2]}/hs_err_%p.log`, ...(process.env.GHOST_JVM ? process.env.GHOST_JVM.split('|') : []), ...(process.env.GHOST_OPEN ? [`-Dghostclient.debug.open=${process.env.GHOST_OPEN}`] : [])],
-      overrides: { gameDirectory: paths.instance(p.id), cwd: paths.instance(p.id), maxSockets: 16 }
+      overrides: { gameDirectory: paths.instance(p.id), cwd: paths.instance(p.id), maxSockets: 16 },
+      // GHOST_WORLD=<mundo> entra directamente en ese mundo
+      ...(process.env.GHOST_WORLD ? { quickPlay: { type: 'singleplayer', identifier: process.env.GHOST_WORLD } } : {})
     })
     proc.on('close', c => { log('cerrado', c); app.exit(0) })
     setTimeout(() => { proc.kill(); app.exit(0) }, Number(seconds) * 1000)

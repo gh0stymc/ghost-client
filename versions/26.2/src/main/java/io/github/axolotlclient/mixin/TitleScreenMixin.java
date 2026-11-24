@@ -131,7 +131,7 @@ public abstract class TitleScreenMixin extends Screen {
 	private Button.Builder axolotlclient$noRealmsbutOptionsButton(Component message, Button.OnPress onPress, Operation<Button.Builder> original) {
 		if (AxolotlClientConfigCommon.instance().titleScreenOptionButtonMode.get().showButton()) {
 			message = Component.translatable("config");
-			onPress = _ -> minecraft.gui.setScreen(new GhostModsScreen(this));
+			onPress = _ -> minecraft.gui.setScreen(new io.github.axolotlclient.ghost.GhostMenuScreen(this));
 		}
 		return original.call(message, onPress);
 	}

@@ -81,8 +81,14 @@ public class SoundEffects extends AbstractCommonModule {
 	private static final String CUSTOM = "custom", OFF = "off";
 	private static final Pattern FORMATTING = Pattern.compile("§.");
 	private static final Pattern DEATH_WORDS = Pattern.compile(
-		"^(?:you died|¡?has muerto|you were killed|fuiste asesinado)|^%s (?:was |died|fell|drowned|burned|blew up|hit the ground|walked into|tried to|went up|froze|starved|suffocated|withered|experienced|discovered|didn't want)",
+		"^(?:you died|¡?has muerto|you were killed|fuiste asesinado|has sido asesinado|te han matado)|^%s (?:was |died|fell|drowned|burned|blew up|hit the ground|walked into|tried to|went up|froze|starved|suffocated|withered|experienced|discovered|didn't want|ha muerto|muri|fue |se cay|se ahog|se quem)",
 		Pattern.CASE_INSENSITIVE);
+	/** "Rival killed Tú", "Rival mató a Tú"...: alguien te ha matado (el nombre va después). */
+	private static final Pattern KILLED_ME = Pattern.compile(
+		"(?:killed|slain|slew|eliminated|mató a|asesinó a|eliminó a|ha matado a|ha eliminado a)\\s+%s(?![A-Za-z0-9_])", Pattern.CASE_INSENSITIVE);
+	/** Palabras de los mensajes de muerte (inglés y español). */
+	private static final Pattern DEATH_HINT = Pattern.compile(
+		"killed|slain|died|eliminated|fell|void|murder|muri|muerto|asesinad|eliminad|matad|vac[ií]o|ca[ií]do");
 
 	public enum Event {
 		KILL("kill", "ding"), DEATH("death", "sad"), STREAK("streak", "fanfare");
@@ -156,7 +162,8 @@ public class SoundEffects extends AbstractCommonModule {
 
 	@Override
 	public void tick() {
-		if (!enabled.get() || tracker == null || client.br$getPlayer() == null) return;
+		// Se detecta siempre (para las estadísticas de ghost client); el sonido solo suena si está activado
+		if (tracker == null || client.br$getPlayer() == null) return;
 		long now = System.currentTimeMillis();
 		if (lastTarget != null) {
 			if (now - lastTargetTime > 6000) {
@@ -173,22 +180,45 @@ public class SoundEffects extends AbstractCommonModule {
 
 	// En servidores como Hypixel no se ve morir al jugador: se usa el mensaje del chat
 	private void onChat(ReceiveChatMessageEvent event) {
-		if (!enabled.get() || event.isActionBar() || client.br$getPlayer() == null) return;
+		if (event.isActionBar() || client.br$getPlayer() == null) return;
 		String msg = FORMATTING.matcher(event.getOriginalMessage()).replaceAll("").trim();
 		if (msg.startsWith("<")) return; // mensaje de un jugador
 		String me = client.br$getPlayer().br$getName();
 		long now = System.currentTimeMillis();
-		if (lastTargetName != null && now - lastTargetTime < 8000 && containsWord(msg, lastTargetName)
-			&& (containsWord(msg, me) || msg.toLowerCase(Locale.ROOT).contains(" you"))) {
+		String lower = msg.toLowerCase(Locale.ROOT);
+		boolean target = lastTargetName != null && now - lastTargetTime < 8000 && containsWord(msg, lastTargetName);
+		int meAt = wordIndex(msg, me);
+		// Antes que nada, ¿has muerto tú? En "Tú was slain by Rival" salen los dos nombres: si se mirase primero si es un
+		// asesinato, contaría como que lo has matado tú (por eso no se contaban las muertes).
+		boolean died = Pattern.compile(DEATH_WORDS.pattern().replace("%s", Pattern.quote(me)), Pattern.CASE_INSENSITIVE).matcher(msg).find()
+			|| Pattern.compile(KILLED_ME.pattern().replace("%s", Pattern.quote(me)), Pattern.CASE_INSENSITIVE).matcher(msg).find();
+		boolean byMe = meAt >= 0 && Pattern.compile("(?:by|por)\\s+" + Pattern.quote(me) + "(?![A-Za-z0-9_])", Pattern.CASE_INSENSITIVE).matcher(msg).find();
+		if (!died && !byMe && meAt >= 0 && DEATH_HINT.matcher(lower).find()) {
+			// mensaje de muerte con tu nombre: si va antes que el del rival, eres tú quien muere ("Tú fue asesinado por Rival")
+			int targetAt = target ? wordIndex(msg, lastTargetName) : -1;
+			died = targetAt < 0 || meAt < targetAt;
+		}
+		if (!died && byMe && DEATH_HINT.matcher(lower).find()) {
+			// "Rival was slain by Tú": lo has matado tú (aunque fuera con arco y no le hubieras pegado)
 			lastTarget = null;
 			lastTargetName = null;
 			kill();
 			return;
 		}
-		String deathPattern = DEATH_WORDS.pattern().replace("%s", Pattern.quote(me));
-		if (Pattern.compile(deathPattern, Pattern.CASE_INSENSITIVE).matcher(msg).find()) {
+		if (died) {
 			death();
+			return;
 		}
+		if (target && (meAt >= 0 || lower.contains(" you"))) {
+			lastTarget = null;
+			lastTargetName = null;
+			kill();
+		}
+	}
+
+	private static int wordIndex(String text, String word) {
+		var m = Pattern.compile("(?<![A-Za-z0-9_])" + Pattern.quote(word) + "(?![A-Za-z0-9_])").matcher(text);
+		return m.find() ? m.start() : -1;
 	}
 
 	private static boolean containsWord(String text, String word) {
@@ -200,7 +230,8 @@ public class SoundEffects extends AbstractCommonModule {
 		if (now - lastKill < 1200) return;
 		lastKill = now;
 		streak++;
-		play(streak % streakEvery.get() == 0 ? Event.STREAK : Event.KILL);
+		io.github.axolotlclient.ghost.GhostStats.kill();
+		if (enabled.get()) play(streak % streakEvery.get() == 0 ? Event.STREAK : Event.KILL);
 	}
 
 	private void death() {
@@ -208,7 +239,8 @@ public class SoundEffects extends AbstractCommonModule {
 		if (now - lastDeath < 3000) return;
 		lastDeath = now;
 		streak = 0;
-		play(Event.DEATH);
+		io.github.axolotlclient.ghost.GhostStats.death();
+		if (enabled.get()) play(Event.DEATH);
 	}
 
 	// ---------- Sonidos ----------

@@ -1,0 +1,12 @@
+{
+	"action.reset": "Restablecer",
+	"clear_graphics": "Borrar dibujo",
+	"draw_graphics": "Dibujar",
+	"open_editor": "Abrir editor",
+	"open_selector": "Abrir selector de color",
+	"option.alpha": "Transparencia",
+	"option.chroma": "Arcoíris",
+	"option.current": "Color actual:",
+	"option.speed": "Velocidad del arcoíris",
+	"select_color": "Elegir color"
+}

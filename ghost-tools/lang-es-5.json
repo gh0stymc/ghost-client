@@ -1,0 +1,21 @@
+{
+  "es": {
+    "friendRequestsEnabled": "Permitir solicitudes de amistad",
+    "viewFriends": "Ver amigos",
+    "statusUpdateNotifs": "Avisos de cambios de estado",
+    "viewChats": "Ver chats",
+    "time_changer.preset.midnight": "Preajuste: medianoche",
+    "time_changer.set_preset": "Poner",
+    "block_outlines.fill": "Relleno",
+    "block_outlines.fill_color": "Color del relleno",
+    "confirm_disconnect": "Confirmar desconexión",
+    "confirm_disconnect.tooltip": "Preguntar antes de salir de un servidor",
+    "confirm_disconnect.title": "Confirmar desconexión",
+    "confirm_disconnect.message": "¿Quieres salir del servidor?",
+    "rpc.starting.error": "No se pudo iniciar el estado de Discord",
+    "profiles.profile.import_preset": "Importar y cargar preajuste",
+    "title_screen_friends_button_mode": "Botón de amigos en la pantalla de título",
+    "title_screen_friends_button_mode.icon": "Icono (preferir el de Minecraft)",
+    "title_screen_friends_button_mode.button": "Botón (preferir el de ghost client)"
+  }
+}

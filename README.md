@@ -1,8 +1,13 @@
 # ghost client
 
-El cliente de [Ghost Launcher](https://github.com/gh0stymc/ghost-launcher) para Minecraft (Fabric):
-HUD configurable (FPS, CPS, ping, keystrokes, armadura, pociones, coordenadas…), zoom, freelook,
-motion blur, hit color, utilidades de Hypixel, sonidos al matar/morir y más.
+Este es el cliente PvP que uso en [Ghost Launcher](https://github.com/gh0stymc/ghost-launcher), mi launcher.
+Quería algo tipo Lunar pero libre y con mi propia cara, y en vez de empezar de cero me apoyé en un proyecto
+excelente que ya existía — [AxolotlClient](https://codeberg.org/AxolotlClient/AxolotlClient-mod) — y lo fui
+adaptando a lo que me gusta: aspecto propio, español, cosméticos y algún extra. Todo el mérito de la base es
+suyo (ver el aviso de abajo).
+
+Para Minecraft (Fabric): HUD configurable (FPS, CPS, ping, keystrokes, armadura, pociones, coordenadas…), zoom,
+freelook, motion blur, hit color, utilidades de Hypixel, sonidos al matar/morir y más.
 
 > **Aviso:** ghost client es una **versión modificada** de
 > [AxolotlClient](https://codeberg.org/AxolotlClient/AxolotlClient-mod), de moehreag y colaboradores,

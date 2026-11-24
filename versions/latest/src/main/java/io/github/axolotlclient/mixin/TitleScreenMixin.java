@@ -135,7 +135,7 @@ public abstract class TitleScreenMixin extends Screen {
 	private Button.Builder axolotlclient$noRealmsbutOptionsButton(Component message, Button.OnPress onPress, Operation<Button.Builder> original) {
 		if (AxolotlClientConfigCommon.instance().titleScreenOptionButtonMode.get().showButton()) {
 			message = Component.translatable("config");
-			onPress = _ -> minecraft.gui.setScreen(new GhostModsScreen(this));
+			onPress = _ -> minecraft.gui.setScreen(new io.github.axolotlclient.ghost.GhostMenuScreen(this));
 		}
 		return original.call(message, onPress);
 	}
@@ -186,7 +186,13 @@ public abstract class TitleScreenMixin extends Screen {
 			return;
 		}
 		ghost$debugOpened = true;
-		Screen hud = "mods".equals(target) ? new GhostModsScreen(this) : new HudEditScreen(this);
+		Screen hud = switch (target) {
+			case "mods" -> new GhostModsScreen(this);
+			case "hub" -> new io.github.axolotlclient.ghost.GhostMenuScreen(this);
+			case "social" -> new io.github.axolotlclient.ghost.GhostSocialScreen(this);
+			case "wardrobe" -> new io.github.axolotlclient.ghost.GhostWardrobeScreen(this);
+			default -> new HudEditScreen(this);
+		};
 		minecraft.execute(() -> minecraft.gui.setScreen("config".equals(target)
 			? ConfigStyles.createScreen(hud, AxolotlClient.getInstance().getConfigManager().getRoot())
 			: hud));

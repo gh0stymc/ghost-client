@@ -157,6 +157,12 @@ public abstract class TitleScreenMixin extends Screen {
 			return;
 		}
 		ghost$debugOpened = true;
-		minecraft.execute(() -> minecraft.setScreen("hud".equals(target) ? new HudEditScreen(this) : new GhostModsScreen(this)));
+		minecraft.execute(() -> minecraft.setScreen(switch (target) {
+			case "hud" -> new HudEditScreen(this);
+			case "hub" -> new io.github.axolotlclient.ghost.GhostMenuScreen(this);
+			case "social" -> new io.github.axolotlclient.ghost.GhostSocialScreen(this);
+			case "wardrobe" -> new io.github.axolotlclient.ghost.GhostWardrobeScreen(this);
+			default -> new GhostModsScreen(this);
+		}));
 	}
 }

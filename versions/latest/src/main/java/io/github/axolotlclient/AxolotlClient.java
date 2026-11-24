@@ -77,6 +77,7 @@ public class AxolotlClient extends AxolotlClientCommon implements ClientModIniti
 				hud.update();
 			}
 		});
+		io.github.axolotlclient.ghost.GhostHooks.init();
 		FeatureRendererRegistry.register(BadgeFeatureRenderer.TYPE, BadgeFeatureRenderer::new);
 		getLogger().debug("Debug Output enabled, Logs will be quite verbose!");
 		getLogger().info("ghost client Initialized");

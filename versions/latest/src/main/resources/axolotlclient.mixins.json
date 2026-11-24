@@ -4,6 +4,13 @@
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"GhostRoundedScreenMixin",
+		"GhostCapeMixin",
+		"GhostLayerMixin",
+		"GhostLivingRendererAccessor",
+		"GhostThinCapeMixin",
+		"GhostFontMixin",
+		"GhostFontScreenMixin",
+		"GhostFontTextMixin",
 		"AbstractContainerScreenAccessor",
 		"AddServerScreenMixin",
 		"BeaconBlockEntityRendererMixin",

@@ -80,7 +80,7 @@ public abstract class GameMenuScreenMixin extends Screen {
 			addRenderableWidget(new Button(widget.getX() + widget.getWidth(),
 				widget.getY() + 50, 20, 20,
 				Component.translatable("config"),
-				_ -> minecraft.gui.setScreen(new GhostModsScreen(this)), Supplier::get) {
+				_ -> minecraft.gui.setScreen(new io.github.axolotlclient.ghost.GhostMenuScreen(this)), Supplier::get) {
 				@Override
 				public void extractContents(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
 					extractDefaultSprite(graphics);

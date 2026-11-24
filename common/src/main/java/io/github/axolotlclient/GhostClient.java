@@ -56,6 +56,17 @@ public final class GhostClient {
 		return DISCORD_APP_ID;
 	}
 
+	/**
+	 * Servidor de ghost client (amigos, chat, estado y cosméticos). Ghost Launcher lo pasa con
+	 * -Dghostclient.server=https://... ; si no, se usa este.
+	 */
+	public static final String DEFAULT_SERVER = "https://ghost-server.gh0styclient.workers.dev";
+
+	public static String server() {
+		String s = System.getProperty("ghostclient.server");
+		return (s == null || s.isBlank() ? DEFAULT_SERVER : s.trim()).replaceAll("/+$", "");
+	}
+
 	private GhostClient() {
 	}
 }

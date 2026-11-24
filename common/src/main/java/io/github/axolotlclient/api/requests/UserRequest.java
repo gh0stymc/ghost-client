@@ -48,6 +48,8 @@ public class UserRequest {
 	private static final Set<String> onlineRequests = Collections.synchronizedSet(new TreeSet<>());
 
 	public static boolean getOnline(String uuid) {
+		// ghost client: el icono junto al nombre es para quien está usando ghost client ahora mismo
+		if (uuid != null) return io.github.axolotlclient.ghost.GhostCosmetics.get().isGhostOnline(uuid);
 
 		if (uuid == null || !API.getInstance().isAuthenticated()) {
 			return false;

@@ -76,7 +76,7 @@ switch ($action) {
     [W]::PostMessage($h, 0x0202, [IntPtr]0, [IntPtr](($y2 -shl 16) -bor $x2)) | Out-Null
   }
   'key' {
-    $codes = @{ ESCAPE = @(0x1B, 0x01); ENTER = @(0x0D, 0x1C); SPACE = @(0x20, 0x39); RIGHT = @(0x27, 0x14D); DOWN = @(0x28, 0x150) }
+    $codes = @{ ESCAPE = @(0x1B, 0x01); ENTER = @(0x0D, 0x1C); SPACE = @(0x20, 0x39); RIGHT = @(0x27, 0x14D); DOWN = @(0x28, 0x150); BACK = @(0x08, 0x0E); TAB = @(0x09, 0x0F); RSHIFT = @(0xA1, 0x36); D1 = @(0x31, 0x02); D2 = @(0x32, 0x03); D3 = @(0x33, 0x04) }
     $vk = $codes[$a][0]; $scan = $codes[$a][1]
     [W]::PostMessage($h, 0x0100, [IntPtr]$vk, [IntPtr](1 -bor ($scan -shl 16))) | Out-Null
     Start-Sleep -Milliseconds 60

@@ -121,7 +121,8 @@ public abstract class AxolotlClientConfigCommon {
 
 	public final BooleanOption noRain = new BooleanOption("noRain", false);
 
-	public final BooleanOption noAltIcons = new BooleanOption("no_alt_icons", false);
+	// ghost client: siempre el fantasma (el original cambia el icono por un zorro algunos días)
+	public final BooleanOption noAltIcons = new BooleanOption("no_alt_icons", true);
 
 	public final OptionCategory config = OptionCategory.create("config");
 	public final OptionCategory hidden = OptionCategory.create("storedOptions");

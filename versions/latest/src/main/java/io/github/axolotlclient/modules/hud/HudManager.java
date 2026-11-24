@@ -43,7 +43,7 @@ public class HudManager extends HudManagerCommon {
 
 	@Override
 	protected void openScreen() {
-		Minecraft.getInstance().gui.setScreen(new GhostModsScreen(null));
+		Minecraft.getInstance().gui.setScreen(new io.github.axolotlclient.ghost.GhostMenuScreen(null));
 	}
 
 	@Override

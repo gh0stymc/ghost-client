@@ -76,6 +76,7 @@ public class AxolotlClient extends AxolotlClientCommon implements ClientModIniti
 			}
 		});
 		getLogger().debug("Debug Output enabled, Logs will be quite verbose!");
+		io.github.axolotlclient.ghost.GhostHooks.init();
 		getLogger().info("ghost client Initialized");
 	}
 

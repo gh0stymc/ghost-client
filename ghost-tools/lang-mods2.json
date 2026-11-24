@@ -1,0 +1,26 @@
+{
+  "en": {
+    "ghost.mods.categories": "CATEGORIES",
+    "ghost.mods.active_of": "of %s on",
+    "ghost.mods.groupdesc.all": "Everything ghost client includes, ready to switch on",
+    "ghost.mods.groupdesc.hud": "Info on your screen: FPS, CPS, armor, keystrokes…",
+    "ghost.mods.groupdesc.visual": "How the game looks: effects, particles, outlines…",
+    "ghost.mods.groupdesc.utility": "Handy tools: zoom, freelook, screenshots…",
+    "ghost.mods.groupdesc.hypixel": "Extras for playing on Hypixel",
+    "ghost.mods.empty.hint": "Try another word or another category",
+    "ghost.mods.key_hint": "Works with a key · click to set it",
+    "ghost.mods.open_settings": "Settings"
+  },
+  "es": {
+    "ghost.mods.categories": "CATEGORÍAS",
+    "ghost.mods.active_of": "de %s activos",
+    "ghost.mods.groupdesc.all": "Todo lo que trae ghost client, listo para activar",
+    "ghost.mods.groupdesc.hud": "Información en pantalla: FPS, CPS, armadura, teclas…",
+    "ghost.mods.groupdesc.visual": "Cómo se ve el juego: efectos, partículas, contornos…",
+    "ghost.mods.groupdesc.utility": "Herramientas útiles: zoom, freelook, capturas…",
+    "ghost.mods.groupdesc.hypixel": "Extras para jugar en Hypixel",
+    "ghost.mods.empty.hint": "Prueba con otra palabra u otra categoría",
+    "ghost.mods.key_hint": "Funciona con una tecla · pulsa para elegirla",
+    "ghost.mods.open_settings": "Ajustes"
+  }
+}
